@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "262751258210",
+    "firebase_url": "https://rum-dev-nativescript.firebaseio.com",
+    "project_id": "rum-dev-nativescript",
+    "storage_bucket": "rum-dev-nativescript.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262751258210:android:0a5965a7b7ed9e50",
+        "android_client_info": {
+          "package_name": "com.rum.heyts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "262751258210-n4jv041khv5479atdo6t331j4c5kk8qo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGhKn-idn30n_t7URyFrNJqpgV8Os9dsk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

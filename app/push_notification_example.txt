@@ -1,0 +1,23 @@
+curl -X POST --header "Authorization: key=AAAAPS0yBmI:APA91bFCoFVsUxLNfCm_bEyDf3Gt1g3RMskLPYXGXwBgHMUljINajHadYf8C2H7v3qHnRt7x1R0vYst7D95a40P7agEydavOsJTdAvyaH9ayZ0zTUh3vu3aEGreB1lCLOfkaSY7gXfWm" --Header "Content-Type: application/json" https://fcm.googleapis.com/fcm/send -d "{\"notification\":{\"title\": \"My title\", \"text\": \"My text\", \"badge\": \"1\", \"sound\": \"default\"}, \"data\":{\"foo\":\"bar\"}, \"priority\": \"High\", \"to\": \"fq2TETK9478:APA91bEY6Ho9RLywLJ5ssB6bkvoeamb2_UCF3snbRfxNKpuHt-fsFu3oHwMkWhTxWT7q-Jez0Ewbb2HOvPUARl_CJ9MKZjkzuhl_C0lI1rfpJon4jqykWlSBdwfseZo9rlIvM2VRokxx\"}"
+
+
+{
+  "notification": {
+    "title": "I DEMAND YOUR ATTENTION",
+    "subtitle": "Just kidding, but not really",
+    "text": "Sorry to bother you I meant, please pick an option below..",
+    "badge": "1",
+    "sound": "default"
+  },
+  "data": {
+    "foo": "bar"
+  },
+  "priority": "High",
+  "to": "fq2TETK9478:APA91bEY6Ho9RLywLJ5ssB6bkvoeamb2_UCF3snbRfxNKpuHt-fsFu3oHwMkWhTxWT7q-Jez0Ewbb2HOvPUARl_CJ9MKZjkzuhl_C0lI1rfpJon4jqykWlSBdwfseZo9rlIvM2VRokxx"
+}
+
+
+POST https://fcm.googleapis.com/v1/projects/rum-dev-nativescript/messages:send
+
+
+Bearer ya29.c.ElqKBhEgkx2sdhAQGklJ0osRnPgzdQNt1GJh0fgAhzTWSwQe0vYGwRq6SUHfh67KQMmF9I45MQ5mNb1K4vGV4_ns6SVH2RLWfaB6hMkyZWEOsr6Vji0rGoLFkVM
