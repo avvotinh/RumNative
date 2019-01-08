@@ -37,11 +37,9 @@ const VuePlugin = {
               break
             case 401:
               console.log('Unauthorized!')
-              Alert.alert('Unauthorized!')
               break;
             case 403:
               console.log('Forbidden!')
-              Alert.alert('Forbidden!')
               break;
             case 405:
               console.log('Method Not Allowed!')
