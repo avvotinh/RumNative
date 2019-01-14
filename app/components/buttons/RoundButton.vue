@@ -44,7 +44,6 @@ export default {
       default: ""
     }
   },
-  data() {},
   methods: {
     tap() {
       this.$emit("tap");

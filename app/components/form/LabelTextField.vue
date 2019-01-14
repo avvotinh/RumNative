@@ -1,9 +1,9 @@
 <template>
   <FlexboxLayout flexDirection="column">
-    <Label :text="label" class="label-input-group" :color="color"/> 
-    <TextField 
+    <Label :text="label" class="label-input-group" :color="color"/>
+    <TextField
       v-model="inputVal"
-      class="input-field" 
+      class="input-field"
       :color="color"
       :borderBottomColor="color"
       :hint="hint"
@@ -23,25 +23,25 @@
 export default {
   props: {
     value: {
-      type: String,
+      type: String
     },
     label: {
       type: String,
-      default: 'Label'
-    }, 
+      default: "Label"
+    },
     color: {
       type: String,
-      default: 'white'
+      default: "white"
     },
     keyboardType: {
-      type: String,
+      type: String
     },
     returnKeyType: {
       type: String
     },
     hint: {
       type: String,
-      default: ''
+      default: ""
     },
     autocorrect: {
       type: Boolean,
@@ -54,44 +54,65 @@ export default {
     maxLength: {
       type: Number,
       default: Infinity
-    },
+    }
   },
   data() {
     return {
       inputVal: this.value
-    }
+    };
   },
-   watch: {
-    inputVal(val) {
-      this.$emit('input', val);
-    }
-  },
+  // watch: {
+  //   inputVal(val) {
+  //     this.$emit("input", val);
+  //   }
+  // },
   methods: {
     focus() {
-      this.$emit('focus')
+      this.$emit("focus");
     },
-    blur(){
-      this.$emit('blur')
+    blur() {
+      this.$emit("blur");
     },
     returnPress() {
-      this.$emit('returnPress')
+      this.$emit("returnPress");
     },
     textChange() {
-      this.$emit('textChange')
+      this.$emit("textChange");
     }
+  },
+  // destroy() {
+  //   vm.$watch(
+  //     "inputVal",
+  //     (newVal, oldVal) => {
+  //       console.log(newVal);
+  //       this.$emit("input", newVal);
+  //     },
+  //     { deep: true }
+  //   );
+  // },
+  mounted() {
+    let vm = this;
+    vm.$watch(
+      "inputVal",
+      (newVal, oldVal) => {
+        console.log(newVal);
+        this.$emit("input", newVal);
+      },
+      { deep: true }
+    );
   }
-}
+};
 </script>
 <style scoped>
 .label-input-group {
   font-size: 14;
   font-weight: 500;
-  margin-bottom: 10
+  margin-bottom: 10;
 }
 .input-field {
   border-bottom-width: 1;
   padding-top: 5;
-  padding-bottom: 10
+  padding-bottom: 10;
 }
 </style>
 

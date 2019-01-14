@@ -7,14 +7,24 @@
     <ScrollView orientation="vertical">
       <StackLayout orientation="vertical">
         <Label
-          text="Login"
+          class="fa"
+          :text="'fa-chevron-left' | fonticon"
           marginTop="40"
+          fontSize="24"
+          fontWeight="600"
+          color="white"
+          @tap="goBack"
+        />
+        <Label
+          text="Login"
+          marginTop="25"
           marginBottom="40"
           fontSize="30"
           fontWeight="600"
           color="white"
         />
         <LabelTextField
+          ref="email"
           v-model="user.email"
           color="white"
           label="Email Address"
@@ -43,7 +53,9 @@
 <script>
 import LabelTextField from "../components/form/LabelTextField";
 import RoundButton from "../components/buttons/RoundButton";
-import Home from './Home'
+import Home from "./Home";
+
+const timer = require("tns-core-modules/timer");
 
 export default {
   components: {
@@ -58,7 +70,11 @@ export default {
       }
     };
   },
+
   methods: {
+    goBack() {
+      this.$navigateBack();
+    },
     login() {
       // if (!this.user.email || !this.user.password) {
       //   alert("Please provide both an email address and password.");
@@ -66,20 +82,35 @@ export default {
       // }
       // alert("Please provide both an email address and password.");
 
-      this.$firebase
-        .login({
-          type: this.$firebase.LoginType.PASSWORD,
-          passwordOptions: {
-            email: "vanhop.pt@gmail.com",
-            password: "12345qwe"
-          }
-        })
-        .then(result => {
-          console.log(JSON.stringify(result))
-          this.$navigateTo(Home)
-        })
-        .catch(error => console.log(error));
+      let payload = {
+        user: this.user.email,
+        password: this.user.password
+      };
+
+      this.$store.dispatch("login", payload).then(token => {
+        this.$storage.setString("token", JSON.stringify(token));
+        this.$navigateTo(Home);
+      });
+      // this.$firebase
+      //   .login({
+      //     type: this.$firebase.LoginType.PASSWORD,
+      //     passwordOptions: {
+      //       email: "vanhop.pt@gmail.com",
+      //       password: "12345qwe"
+      //     }
+      //   })
+      //   .then(result => {
+      //     console.log(JSON.stringify(result));
+      //     this.$navigateTo(Home);
+      //   })
+      //   .catch(error => console.log(error));
     }
+  },
+  mounted() {
+    let emailView = this.$refs.email.nativeView;
+    timer.setTimeout(() => {
+      emailView.focus();
+    }, 500);
   }
 };
 </script>

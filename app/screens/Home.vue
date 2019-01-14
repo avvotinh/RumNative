@@ -137,7 +137,7 @@ export default {
       return `Scrolled to ${this.scrollOffset} offset`;
     }
   },
-  methods: {  
+  methods: {
     openMenuUser() {
       Menu.popup({
         view: this.$refs.body.nativeView.getViewById("menu-user"),
@@ -182,6 +182,8 @@ export default {
     }
   },
   mounted() {
+    let token = this.$storage.getString("token");
+
     this.collection.onSnapshot(querySnapshot => {
       querySnapshot.forEach(doc => {
         console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
@@ -203,5 +205,4 @@ export default {
 };
 </script>
 <style scoped>
-
 </style>

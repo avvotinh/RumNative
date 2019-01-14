@@ -3,6 +3,7 @@ const state = {
   logging_in: false,
   isAuthenticated: false,
   user: null,
+  user_token: null,
   notification_token: null,
   connection: {
     type: null,

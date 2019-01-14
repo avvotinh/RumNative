@@ -19,7 +19,7 @@
             :text="'fa-calendar' | fonticon"
             elevation="0"
             variant="flat"
-            @tap="animate()"
+            @tap="openModal"
           />
           <MDButton
             class="fa btn-icon"
@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 import { Menu } from "nativescript-menu";
 import sideDrawer from "~/mixins/sideDrawer";
@@ -133,21 +133,20 @@ export default {
         { name: "Item 1", description: "Item 1 description" },
         { name: "Item 2", description: "Item 2 description" },
         { name: "Item 3", description: "Item 3 description" }
-      ],
+      ]
     };
   },
   computed: {
-    connection () {
-      return this.$store.getters.connection
+    connection() {
+      return this.$store.getters.connection;
     }
   },
   watch: {
     connection: {
       immediate: true,
-      handler (val, oldVal) {
-      }
+      handler(val, oldVal) {}
     }
-  }, 
+  },
   methods: {
     openMenuUser() {
       Menu.popup({

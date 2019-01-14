@@ -1,10 +1,8 @@
 import Vue from 'nativescript-vue'
-import App from './screens/App'
-import Login from './screens/Login'
-import Home from './screens/Home'
 import VueDevtools from 'nativescript-vue-devtools'
 import { TNSFontIcon, fonticon } from 'nativescript-fonticon';
 
+import * as setting from 'tns-core-modules/application-settings'
 import VMoment from "vue-moment";
 import Connectivity from './plugins/connectivity'
 import Firebase from './plugins/firebase'
@@ -56,6 +54,7 @@ Vue.use(Firebase)
 Vue.use(Axios)
 Vue.use(RadListView);
 Vue.prototype.$routes = routes
+Vue.prototype.$storage = setting
 
 /**
  * Register Element Material Component
@@ -70,10 +69,12 @@ Vue.registerElement('MDSlider', () => Slider);
 Vue.registerElement('MDProgress', () => Progress);
 Vue.registerElement('MDActivityIndicator', () => ActivityIndicator);
 
+let token = setting.getString('token')
+
 new Vue({
   data() {
     return {
-      networkStatus: ""
+      networkStatus: "",
     }
   },
   render: h => {
@@ -81,7 +82,7 @@ new Vue({
       Layout,
       [
         h(Drawer, { slot: 'drawerContent' }),
-        h(routes.PageTwo, { slot: 'mainContent' })
+        h(token ? routes.Home : routes.LoggedOut, { slot: 'mainContent' })
       ]
     )
   },
