@@ -7,7 +7,7 @@
     @tap="tap"
   >
     <Label
-      class="btn-icon fa"
+      class="icon fa"
       :color="textColor"
       :text="icon | fonticon"
       col="0"
@@ -52,13 +52,13 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .button-round {
   border-radius: 100%;
   border-color: white;
   border-width: 2;
 }
-.btn-icon {
+.icon {
   font-size: 18;
 }
 .btn-text {

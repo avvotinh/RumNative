@@ -20,5 +20,9 @@ export default {
   },
   SET_LOADING (state, payload) {
     state.loading = payload
-  }
+  },
+  SET_CONNECTION (state, payload) {
+    state.connection.type = payload.type
+    state.connection.status = payload.status
+  },
 }

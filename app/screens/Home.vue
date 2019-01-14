@@ -1,6 +1,6 @@
 <template>
-  <Page>
-    <ActionBar>
+  <Page ref="body" androidStatusBarBackground="white" statusBarStyle="light">
+    <ActionBar backgroundColor="white">
       <GridLayout columns="auto, *, auto">
         <Label
           col="1"
@@ -9,18 +9,50 @@
           verticalAlignment="center"
           horizontalAlignment="left"
         />
-        <!-- <Button col="2" class="fa btn-rounded" fontSize="14">{{'fa-facebook' | fonticon}}</Button> -->
-        <MDRipple col="2" rippleColor="green" width="200" height="200">
-          <Label
-            text="N"
-            fontSize="24"
-            verticalAlignment="center"
-            horizontalAlignment="left"
-            textWrap="true"
+        <StackLayout col="2" orientation="horizontal">
+          <MDButton
+            class="fa btn-icon"
+            rippleColor="rgba(0,0,0,0.08)"
+            :text="'fa-bell' | fonticon"
+            elevation="0"
+            variant="flat"
+            @tap="openDrawer"
           />
-        </MDRipple>
+          <MDButton
+            class="fa btn-icon"
+            rippleColor="rgba(0,0,0,0.08)"
+            :text="'fa-user' | fonticon"
+            elevation="0"
+            variant="flat"
+            id="menu-user"
+            ref="menu"
+            @tap="openMenuUser"
+          />
+        </StackLayout>
       </GridLayout>
     </ActionBar>
+    <StackLayout class="sideStackLayout">
+      <StackLayout class="sideTitleStackLayout">
+        <Label text="Navigation Menu"></Label>
+      </StackLayout>
+      <StackLayout class="sideStackLayout">
+        <Label text="Primary" class="sideLabel sideLightGrayLabel"></Label>
+        <Label text="Social" class="sideLabel"></Label>
+        <Label text="Promotions" class="sideLabel"></Label>
+        <Label text="Labels" class="sideLabel sideLightGrayLabel"></Label>
+        <Label text="Important" class="sideLabel"></Label>
+        <Label text="Starred" class="sideLabel"></Label>
+        <Label text="Sent Mail" class="sideLabel"></Label>
+        <Label text="Drafts" class="sideLabel"></Label>
+      </StackLayout>
+      <Label
+        text="Close Drawer"
+        color="lightgray"
+        padding="10"
+        style="horizontal-align: center"
+        @tap="onCloseDrawerTap"
+      ></Label>
+    </StackLayout>
     <GridLayout orientation="vertical" rows="auto, *">
       <RadListView
         ref="listView"
@@ -30,7 +62,7 @@
         @itemSwipeProgressStarted="onSwipeStarted"
       >
         <v-template>
-          <StackLayout padding="16" backgroundColor="#F0F6FF" class="item" orientation="vertical">
+          <StackLayout padding="16" backgroundColor="white" class="item" orientation="vertical">
             <Label fontSize="24" color="#0A255A" class="big" :text="item.name"></Label>
             <Label padding="8,0" color="#B3B6C8" :text="item.description"></Label>
           </StackLayout>
@@ -76,6 +108,9 @@
   </Page>
 </template>
 <script>
+import { Menu } from "nativescript-menu";
+import sideDrawer from "~/mixins/sideDrawer";
+
 const getItemList = count => {
   let itemList = [];
   for (let i = 1; i <= count; i++) {
@@ -89,6 +124,7 @@ const getItemList = count => {
 };
 
 export default {
+  mixins: [sideDrawer],
   data() {
     return {
       scrollOffset: 0,
@@ -101,7 +137,17 @@ export default {
       return `Scrolled to ${this.scrollOffset} offset`;
     }
   },
-  methods: {
+  methods: {  
+    openMenuUser() {
+      Menu.popup({
+        view: this.$refs.body.nativeView.getViewById("menu-user"),
+        actions: ["Đổi mật khẩu", "Thống kê", "Đăng xuất"]
+      })
+        .then(val => {
+          if (val) alert(val);
+        })
+        .catch(e => console.log(e));
+    },
     onItemTap({ item }) {
       console.log(`Tapped on ${item.name}`);
     },
@@ -157,10 +203,5 @@ export default {
 };
 </script>
 <style scoped>
-.btn-rounded {
-  width: 60px;
-  height: 60px;
-  background-color: aqua;
-  border-radius: 100;
-}
+
 </style>

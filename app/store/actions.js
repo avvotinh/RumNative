@@ -11,6 +11,11 @@ export default {
   setUser({commit}, payload) {
     commit('SET_USER', payload)
   },
+
+  setConnection({commit}, payload) {
+    commit('SET_CONNECTION', payload)
+  },
+
   logout({commit}, {navigate}) {
   }
 }
