@@ -61,7 +61,7 @@
             color="white"
           />
           <MDButton
-            class="fa btn-icon"W
+            class="fa btn-icon"
             backgroundColor="rgba(255,0,0,0.4)"
             rippleColor="rgba(255,255,255,0.2)"
             :text="'fa-trash' | fonticon"
