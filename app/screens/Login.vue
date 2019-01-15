@@ -27,7 +27,11 @@
           ref="email"
           v-model="user.email"
           color="white"
+          :autofocus="true"
           label="Email Address"
+          @focus="emailFocus"
+          @textChange="handleEmailChange"
+          :showCheckmark="valid.user"
           keyboardType="email"
           returnKeyType="next"
         />
@@ -36,6 +40,8 @@
           color="white"
           label="Password"
           :secure="true"
+          @textChange="handlePasswordChange"
+          :showCheckmark="valid.password"
           returnKeyType="done"
           marginTop="40"
         />
@@ -53,9 +59,11 @@
 <script>
 import LabelTextField from "../components/form/LabelTextField";
 import RoundButton from "../components/buttons/RoundButton";
+import Loading from "~/components/loading";
 import Home from "./Home";
 
 const timer = require("tns-core-modules/timer");
+const enums = require("tns-core-modules/ui/enums");
 
 export default {
   components: {
@@ -67,13 +75,52 @@ export default {
       user: {
         email: "",
         password: ""
+      },
+      valid: {
+        email: false,
+        password: false
       }
     };
   },
-
+  computed: {
+    isLogging() {
+      return this.$store.state.logging_in;
+    }
+  },
+  watch: {
+    isLogging: {
+      deep: true,
+      handler(val, oldVal) {
+        if (val) {
+          this.$showModal(Loading);
+        } else {
+          this.$modal.close("Loading");
+        }
+      }
+    }
+  },
   methods: {
     goBack() {
       this.$navigateBack();
+    },
+    handleEmailChange(e) {
+      let val = e.object.text;
+      let emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      console.log(emailCheckRegex.test(val));
+      if (emailCheckRegex.test(val)) this.valid.email = true;
+    },
+    handlePasswordChange(e) {
+      let val = e.object.text;
+      let strongCheckRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+      let mediumCheckRegex = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/;
+
+      if (strongCheckRegex.test(val)) {
+        console.log("Mat khau manh");
+      } else if (mediumCheckRegex.test(val)) {
+        console.log("Mat khau trung binh");
+      } else {
+        console.log("Mat khau yeu");
+      }
     },
     login() {
       // if (!this.user.email || !this.user.password) {
@@ -89,29 +136,18 @@ export default {
 
       this.$store.dispatch("login", payload).then(token => {
         this.$storage.setString("token", JSON.stringify(token));
-        this.$navigateTo(Home);
+        this.$navigateTo(Home, {
+          animated: true,
+          transition: {
+            name: "slideLeft",
+            duration: 250,
+            curve: "easeIn"
+          }
+        });
       });
-      // this.$firebase
-      //   .login({
-      //     type: this.$firebase.LoginType.PASSWORD,
-      //     passwordOptions: {
-      //       email: "vanhop.pt@gmail.com",
-      //       password: "12345qwe"
-      //     }
-      //   })
-      //   .then(result => {
-      //     console.log(JSON.stringify(result));
-      //     this.$navigateTo(Home);
-      //   })
-      //   .catch(error => console.log(error));
     }
   },
-  mounted() {
-    let emailView = this.$refs.email.nativeView;
-    timer.setTimeout(() => {
-      emailView.focus();
-    }, 500);
-  }
+  mounted() {}
 };
 </script>
 
@@ -129,5 +165,15 @@ ScrollView {
 StackLayout {
   padding-left: 20;
   padding-right: 20;
+}
+.text-input {
+  border-radius: 100;
+  padding-left: 15;
+  padding-right: 15;
+  padding-bottom: 15;
+  padding-top: 15;
+  margin-top: 10;
+  border-width: 1;
+  border-color: white;
 }
 </style>

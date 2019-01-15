@@ -13,6 +13,15 @@
           <MDButton
             class="fa btn-icon"
             rippleColor="rgba(0,0,0,0.08)"
+            :text="'fa-cog' | fonticon"
+            color="black"
+            elevation="0"
+            variant="flat"
+            @tap="goToAnimationPage"
+          />
+          <MDButton
+            class="fa btn-icon"
+            rippleColor="rgba(0,0,0,0.08)"
             :text="'fa-bell' | fonticon"
             color="black"
             elevation="0"
@@ -38,7 +47,6 @@
         ref="listView"
         for="item in itemList"
         swipeActions="true"
-        @loaded="onLoaded"
         @itemSwipeProgressStarted="onSwipeStarted"
       >
         <v-template>
@@ -91,6 +99,7 @@
 import { Menu } from "nativescript-menu";
 import routes from "../router";
 import sideDrawer from "~/mixins/sideDrawer";
+import Animation from "~/screens/Animation";
 
 const getItemList = count => {
   let itemList = [];
@@ -143,15 +152,25 @@ export default {
         })
         .catch(e => console.log(e));
     },
+    goToAnimationPage() {
+      this.$navigateTo(Animation, {
+        animated: true,
+        transition: {
+          name: "slideLeft",
+          duration: 250,
+          curve: "easeIn"
+        }
+      });
+    },
     onItemTap({ item }) {
       console.log(`Tapped on ${item.name}`);
     },
-    onLoaded() {
-      setTimeout(() => {
-        console.log("Programatic scrolling...");
-        this.$refs.listView.scrollToIndex(50);
-      }, 500);
-    },
+    // onLoaded() {
+    //   setTimeout(() => {
+    //     console.log("Programatic scrolling...");
+    //     this.$refs.listView.scrollToIndex(50);
+    //   }, 500);
+    // },
     onScrolled({ scrollOffset }) {
       this.scrollOffset = scrollOffset;
     },
