@@ -6,6 +6,12 @@ const VuePlugin = {
   install(Vue, options) {
 
     firebase.init({
+      onAuthStateChanged: function(data) { 
+        console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
+        if (data.loggedIn) {
+          console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
+        }
+      },
       onMessageReceivedCallback: function (message) {
         console.log("Title: " + message.title);
         console.log("Body: " + message.body);

@@ -14,6 +14,7 @@
             class="fa btn-icon"
             rippleColor="rgba(0,0,0,0.08)"
             :text="'fa-bell' | fonticon"
+            color="black"
             elevation="0"
             variant="flat"
             @tap="openDrawer"
@@ -23,6 +24,7 @@
             rippleColor="rgba(0,0,0,0.08)"
             :text="'fa-user' | fonticon"
             elevation="0"
+            color="black"
             variant="flat"
             id="menu-user"
             ref="menu"
@@ -31,29 +33,7 @@
         </StackLayout>
       </GridLayout>
     </ActionBar>
-    <StackLayout class="sideStackLayout">
-      <StackLayout class="sideTitleStackLayout">
-        <Label text="Navigation Menu"></Label>
-      </StackLayout>
-      <StackLayout class="sideStackLayout">
-        <Label text="Primary" class="sideLabel sideLightGrayLabel"></Label>
-        <Label text="Social" class="sideLabel"></Label>
-        <Label text="Promotions" class="sideLabel"></Label>
-        <Label text="Labels" class="sideLabel sideLightGrayLabel"></Label>
-        <Label text="Important" class="sideLabel"></Label>
-        <Label text="Starred" class="sideLabel"></Label>
-        <Label text="Sent Mail" class="sideLabel"></Label>
-        <Label text="Drafts" class="sideLabel"></Label>
-      </StackLayout>
-      <Label
-        text="Close Drawer"
-        color="lightgray"
-        padding="10"
-        style="horizontal-align: center"
-        @tap="onCloseDrawerTap"
-      ></Label>
-    </StackLayout>
-    <GridLayout orientation="vertical" rows="auto, *">
+    <GridLayout ~mainContent orientation="vertical" rows="auto, *">
       <RadListView
         ref="listView"
         for="item in itemList"
@@ -109,6 +89,7 @@
 </template>
 <script>
 import { Menu } from "nativescript-menu";
+import routes from "../router";
 import sideDrawer from "~/mixins/sideDrawer";
 
 const getItemList = count => {
@@ -144,7 +125,21 @@ export default {
         actions: ["Đổi mật khẩu", "Thống kê", "Đăng xuất"]
       })
         .then(val => {
-          if (val) alert(val);
+          switch (val) {
+            case "Đăng xuất":
+              this.$store.dispatch("logout").then(() => {
+                this.$storage.remove("token");
+                this.$navigateTo(routes.LoggedOut, {
+                  animated: true,
+                  transition: {
+                    name: "slideRight",
+                    duration: 250,
+                    curve: "easeIn"
+                  }
+                });
+              });
+              break;
+          }
         })
         .catch(e => console.log(e));
     },
@@ -182,8 +177,6 @@ export default {
     }
   },
   mounted() {
-    let token = this.$storage.getString("token");
-
     this.collection.onSnapshot(querySnapshot => {
       querySnapshot.forEach(doc => {
         console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);

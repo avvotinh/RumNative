@@ -42,6 +42,11 @@ export default {
     commit('SET_CONNECTION', payload)
   },
 
-  logout({ commit }, { navigate }) {
+  logout({ dispatch }) {
+    return new Promise((resolve, reject) => {
+      firebase.logout()
+      dispatch('setUserToken', null)
+      resolve()
+    })
   }
 }
