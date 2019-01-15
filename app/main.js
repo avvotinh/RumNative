@@ -25,6 +25,7 @@ import { CardView } from 'nativescript-cardview'
 import { Slider } from 'nativescript-material-slider'
 import { Progress } from 'nativescript-material-progress'
 import { ActivityIndicator } from 'nativescript-material-activityindicator'
+import { LottieView } from 'nativescript-lottie'
 
 // Import drawer componets
 import Layout from '~/layout'
@@ -68,6 +69,7 @@ Vue.registerElement('CardView', () => CardView);
 Vue.registerElement('MDSlider', () => Slider);
 Vue.registerElement('MDProgress', () => Progress);
 Vue.registerElement('MDActivityIndicator', () => ActivityIndicator);
+Vue.registerElement('LottieView', () => LottieView)
 
 let token = setting.getString('token')
 
