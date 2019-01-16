@@ -66,7 +66,7 @@ export default {
         .then(selection => {
           this.imagesPicker = [...selection];
           let images = selection.map(selected =>
-            fs.File.fromPath(selected.android)
+            fs.File.fromPa  th(selected.android)
           );
           return images;
         })
