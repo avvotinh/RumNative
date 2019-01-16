@@ -19,13 +19,7 @@ import { LottieView } from 'nativescript-lottie';
  * Import Material Components
  */
 import { Button } from 'nativescript-material-button'
-import { Ripple } from 'nativescript-material-ripple'
-import { FloatingActionButton } from 'nativescript-material-floatingactionbutton'
-import { TextField } from 'nativescript-material-textfield'
 import { CardView } from 'nativescript-cardview'
-import { Slider } from 'nativescript-material-slider'
-import { Progress } from 'nativescript-material-progress'
-import { ActivityIndicator } from 'nativescript-material-activityindicator'
 
 // Import drawer componets
 import Layout from '~/layout'
@@ -62,13 +56,7 @@ Vue.prototype.$storage = setting
  */
 Vue.registerElement('RadSideDrawer', () => RadSideDrawer)
 Vue.registerElement('MDButton', () => Button)
-Vue.registerElement('MDRipple', () => Ripple)
-Vue.registerElement('MDFloatingActionButton', () => FloatingActionButton);
-Vue.registerElement('MDTextField', () => TextField);
 Vue.registerElement('CardView', () => CardView);
-Vue.registerElement('MDSlider', () => Slider);
-Vue.registerElement('MDProgress', () => Progress);
-Vue.registerElement('MDActivityIndicator', () => ActivityIndicator);
 Vue.registerElement('LottieView', () => LottieView);
 
 let token = setting.getString('token')
