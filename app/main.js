@@ -38,6 +38,7 @@ Vue.config.silent = true
 TNSFontIcon.debug = true;
 TNSFontIcon.paths = {
   'fa': './fonts/font-awesome.min.css',
+  'mdi': './fonts/materialdesignicons.min.css'
 };
 TNSFontIcon.loadCss();
 Vue.filter('fonticon', fonticon);

@@ -65,6 +65,7 @@
     "webpack-cli": "^3.1.0"
   },
   "scripts": {
+    "run-ios": "tns run ios --bundle --device 'iPhone X'",
     "e2e": "mocha --opts ./e2e/config/mocha.opts"
   }
 }
