@@ -32,10 +32,11 @@
         "fullReset": false,
         "app": ""
     },
-    "android24": {
+    "samsung": {
         "platformName": "Android",
         "platformVersion": "7.0",
         "deviceName": "SM_T813",
+        "udid": "1d075f8004c5b481",
         "lt": 60000,
         "newCommandTimeout": 720,
         "noReset": true,
@@ -56,8 +57,9 @@
     "android26": {
         "platformName": "Android",
         "platformVersion": "8.0",
-        "deviceName": "Emulator-Api26-Google",
-        "avd": "Emulator-Api26-Google",
+        "deviceName": "Pixel2XL26",
+        "avd": "Pixel2XL26",
+        "udid": "5554",
         "lt": 60000,
         "newCommandTimeout": 720,
         "noReset": true,
@@ -66,9 +68,10 @@
     },
     "android27": {
         "platformName": "Android",
-        "platformVersion": "27",
-        "deviceName": "Emulator-Api27-Google",
-        "avd": "Emulator-Api27-Google",
+        "platformVersion": "8.1",
+        "deviceName": "Pixel-2-XL-27",
+        "avd": "Pixel-2-XL-27",
+        "udid": "5554",
         "lt": 60000,
         "newCommandTimeout": 720,
         "noReset": true,

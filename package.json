@@ -66,6 +66,7 @@
   },
   "scripts": {
     "run-ios": "tns run ios --bundle --device 'iPhone X'",
-    "e2e": "mocha --opts ./e2e/config/mocha.opts"
+    "e2e": "mocha --opts ./e2e/config/mocha.opts",
+    "test-samsung": "npm run e2e -- --runType samsung --devMode"
   }
 }
