@@ -7,7 +7,7 @@
     @tap="tap"
   >
     <Label
-      class="icon fa"
+      class="icon mdi"
       :color="textColor"
       :text="icon | fonticon"
       col="0"

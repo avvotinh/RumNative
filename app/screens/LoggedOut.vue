@@ -23,7 +23,7 @@
         />
         <RoundButton
           text="Login with Facebook"
-          icon="fa-facebook"
+          icon="mdi-facebook"
           textColor="#008388"
           background="#fff"
           @tap="handleLoginFacebook"

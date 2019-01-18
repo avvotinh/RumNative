@@ -1,6 +1,7 @@
 <template>
   <Page ref="body" androidStatusBarBackground="white" statusBarStyle="light">
     <ActionBar backgroundColor="white">
+      <NavigationButton visibility="hidden"></NavigationButton>
       <GridLayout columns="auto, *, auto">
         <Label
           col="1"
@@ -11,9 +12,9 @@
         />
         <StackLayout col="2" orientation="horizontal">
           <MDButton
-            class="fa btn-icon"
+            class="mdi btn-icon"
             rippleColor="rgba(0,0,0,0.08)"
-            :text="'fa-cog' | fonticon"
+            :text="'mdi-settings' | fonticon"
             color="black"
             elevation="0"
             variant="flat"
