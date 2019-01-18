@@ -2,6 +2,7 @@ import Vue from 'nativescript-vue'
 import VueDevtools from 'nativescript-vue-devtools'
 import { TNSFontIcon, fonticon } from 'nativescript-fonticon';
 
+import * as application from 'application';
 import * as setting from 'tns-core-modules/application-settings'
 import VMoment from "vue-moment";
 import Connectivity from './plugins/connectivity'
@@ -67,6 +68,11 @@ new Vue({
     return {
       networkStatus: "",
     }
+  },
+  mounted() {
+    application.on(application.launchEvent, function (args) {
+      console.log('launch event, init facebook')
+    });
   },
   render: h => {
     return h(

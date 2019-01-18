@@ -84,6 +84,7 @@ import { SnackBar, SnackBarOptions } from "nativescript-snackbar";
 import RoundButton from "../components/buttons/RoundButton";
 import ProgressBar from "../components/progress";
 import Login from "./Login";
+import Home from "./Home";
 
 let snackbar = new SnackBar();
 const timer = require("tns-core-modules/timer");
@@ -174,7 +175,19 @@ export default {
     //   });
     // },
     handleLoginFacebook() {
-      console.log("Login with facebook");
+      this.$store.dispatch("loginFB").then(token => {
+        console.log("TOKEN: ", token);
+        this.$storage.setString("token", JSON.stringify(token));
+        this.$navigateTo(Home, {
+          animated: true,
+          transition: {
+            name: "slideLeft",
+            duration: 250,
+            curve: "easeIn"
+          },
+          clearHistory: true
+        });
+      });
     },
     handleCreateAccount() {
       this.$navigateTo(Login, {

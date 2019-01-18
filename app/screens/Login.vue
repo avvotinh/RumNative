@@ -142,7 +142,8 @@ export default {
             name: "slideLeft",
             duration: 250,
             curve: "easeIn"
-          }
+          },
+          clearHistory: true
         });
       });
     }

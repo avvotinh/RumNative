@@ -65,7 +65,8 @@
     "webpack-cli": "^3.1.0"
   },
   "scripts": {
-    "run-ios": "tns run ios --bundle --device 'iPhone X'",
+    "android": "tns run android --bundle",
+    "ios": "tns run ios --bundle --device 'iPhone X'",
     "e2e": "mocha --opts ./e2e/config/mocha.opts",
     "test-samsung": "npm run e2e -- --runType samsung --devMode"
   }

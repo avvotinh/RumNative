@@ -104,7 +104,7 @@
     },
     "sim.iPhoneX": {
         "platformName": "iOS",
-        "platformVersion": "11.3",
+        "platformVersion": "12.1",
         "deviceName": "iPhone X",
         "noReset": true,
         "fullReset": false,

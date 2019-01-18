@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Rum Native Example</string>
     <string name="title_activity_kimera">Rum Native Example</string>
+    <string name="facebook_app_id">221565698786234</string>
 </resources>
