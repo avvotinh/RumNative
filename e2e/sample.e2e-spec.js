@@ -27,35 +27,77 @@ describe("App Testing", () => {
     assert.isTrue(platform)
   })
 
-  describe('')
+  describe('Facebook login test', async () => {
+    const USERNAME = 'vanhop.pt@gmail.com'
+    const PASSWORD = 'LINH@hop1'
 
-  describe('Login Page', async () => {
+    it('should facebook login via custom button', async () => {
+      let fbButton = await driver.findElementByText("Facebook", nsAppium.SearchOptions.contains);
+      await fbButton.tap();
 
-    it("naviagte to Login page", async () => {
-      let btnTap = await driver.findElementByText("Login with Email", nsAppium.SearchOptions.exact);
-      await btnTap.tap();
+      if (driver.isAndroid) {
+        const allFields = await driver.findElementsByClassName(driver.locators.getElementByName('textfield'))
+        await allFields[0].sendKeys(USERNAME);
+        try {
+          await driver.driver.hideDeviceKeyboard();
+        } catch (error) { }
+        await driver.wait(1000);
+        await allFields[1].sendKeys(PASSWORD);
+      } else {
+        const usernameField = await driver.findElementByClassName(driver.locators.getElementByName("textfield"));
+        await usernameField.click();
+        await usernameField.sendKeys(USERNAME);
+        const passField = await driver.findElementByClassName(driver.locators.getElementByName("securetextfield"));
+        await passField.click();
+        await passField.sendKeys(PASSWORD);
+      }
 
-      let loginPage = await driver.findElementByText("Login", nsAppium.SearchOptions.exact)
-      await loginPage.waitForExist(200)
+      try {
+        await driver.driver.hideDeviceKeyboard("Done");
+      } catch (error) { }
+      if (driver.isAndroid) {
+        const logInButton = await driver.findElementByClassName(driver.locators.button);
+        await logInButton.click();
+        const continueButton = await driver.findElementByText("Continue");
+        await continueButton.click();
+      } else {
+        const logInButton = await driver.findElementByText("Log In");
+        await logInButton.click();
+        const continueButton = await driver.findElementByText("Continue");
+        await continueButton.click();
+      }
 
-      assert.isTrue(await loginPage.isDisplayed())
-    });
-
-    it('should verify Login page', async () => {
-      let emailLabel = await driver.findElementByText('Email Address', nsAppium.SearchOptions.exact)
-      let passwordLabel = await driver.findElementByText('Password', nsAppium.SearchOptions.exact)
-
-      // assert.isTrue(await emailLabel.isDisplayed())
-      // assert.isTrue(await passwordLabel.isDisplayed())
-      expect(await emailLabel.isDisplayed()).to.be.true
-      expect(await passwordLabel.isDisplayed()).to.be.true
-
-      let labels = await driver.findElementsByClassName(driver.locators.getElementByName('label'))
-
-      // assert.equal(await labels.length, 5)
-      expect(await labels.length).to.equal(5)
     })
+
   })
+
+  // describe('Login Page', async () => {
+
+  //   it("naviagte to Login page", async () => {
+  //     let btnTap = await driver.findElementByText("Login with Email", nsAppium.SearchOptions.exact);
+  //     await btnTap.tap();
+
+  //     let loginPage = await driver.findElementByText("Login", nsAppium.SearchOptions.exact)
+  //     await loginPage.waitForExist(200)
+
+  //     assert.isTrue(await loginPage.isDisplayed())
+  //   });
+
+  //   it('should verify Login page', async () => {
+  //     let emailLabel = await driver.findElementByText('Email Address', nsAppium.SearchOptions.exact)
+  //     let passwordLabel = await driver.findElementByText('Password', nsAppium.SearchOptions.exact)
+
+  //     // assert.isTrue(await emailLabel.isDisplayed())
+  //     // assert.isTrue(await passwordLabel.isDisplayed())
+  //     expect(await emailLabel.isDisplayed()).to.be.true
+  //     expect(await passwordLabel.isDisplayed()).to.be.true
+
+  //     let labels = await driver.findElementsByClassName(driver.locators.getElementByName('label'))
+
+  //     // assert.equal(await labels.length, 5)
+  //     expect(await labels.length).to.equal(5)
+  //   })
+  // })
 
 
 
@@ -79,5 +121,8 @@ describe("App Testing", () => {
   // });
 
 
+  // it('should scroll the list', async () => {
+  //   let listView = await driver.findElementByClassName(driver.locators.getElementByName('listview'))
+  // })
 
 });
