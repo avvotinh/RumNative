@@ -39,7 +39,8 @@
     "nativescript-vue-devtools": "^1.0.0",
     "tns-core-modules": "^5.0.2",
     "vue-moment": "^4.0.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "wd": "^1.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -68,6 +69,7 @@
     "android": "tns run android --bundle",
     "ios": "tns run ios --bundle --device 'iPhone X'",
     "e2e": "mocha --opts ./e2e/config/mocha.opts",
-    "test-samsung": "npm run e2e -- --runType samsung --devMode"
+    "test-samsung": "npm run e2e -- --runType samsung --devMode",
+    "test-ipx": "npm run e2e -- --runType sim.iPhoneX --devMode"
   }
 }

@@ -106,6 +106,7 @@
         "platformName": "iOS",
         "platformVersion": "12.1",
         "deviceName": "iPhone X",
+        "udid": "61730E6E-7845-4DDD-97EF-2D7C5B3BBCD3",
         "noReset": true,
         "fullReset": false,
         "app": ""

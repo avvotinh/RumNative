@@ -22,11 +22,6 @@ describe("App Testing", () => {
     }
   });
 
-  it('check platform is android', async () => {
-    let platform = driver.isAndroid
-    assert.isTrue(platform)
-  })
-
   describe('Facebook login test', async () => {
     const USERNAME = 'vanhop.pt@gmail.com'
     const PASSWORD = 'LINH@hop1'
@@ -58,7 +53,7 @@ describe("App Testing", () => {
       if (driver.isAndroid) {
         const logInButton = await driver.findElementByClassName(driver.locators.button);
         await logInButton.click();
-        const continueButton = await driver.findElementByText("Continue");
+        const continueButton = await driver.findElementByText("Tiếp tục");
         await continueButton.click();
       } else {
         const logInButton = await driver.findElementByText("Log In");
